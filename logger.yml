@@ -1,0 +1,29 @@
+name: Daily Trade Logger
+
+on:
+  schedule:
+    # Runs at 18:30 UTC (12:00 AM IST)
+    - cron: '30 18 * * *'
+  workflow_dispatch:
+
+jobs:
+  log_trades:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Logger Script
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DELTA_API_KEY: ${{ secrets.DELTA_API_KEY }}
+          DELTA_API_SECRET: ${{ secrets.DELTA_API_SECRET }}
+        run: python main.py
