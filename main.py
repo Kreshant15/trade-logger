@@ -10,7 +10,7 @@ DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 API_KEY = os.getenv("DELTA_API_KEY")
 API_SECRET = os.getenv("DELTA_API_SECRET")
 
-BASE_URL = "https://api.delta.exchange"
+BASE_URL = "https://api.india.delta.exchange"
 
 def get_signature(api_secret, method, timestamp, path, query_string=''):
     signature_data = method + timestamp + path + query_string
